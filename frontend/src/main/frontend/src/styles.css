@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --main-color: #0990ad;
+  --secondary-color: #47c7e3;
+  --error-color: #e34747;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  font-family: sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.f-1 {
+  max-width: 8.33333333333%;
+  flex-basis: 8.33333333333%;
+}
+
+.f-2 {
+  max-width: 16.6666666667%;
+  flex-basis: 16.6666666667%;
+}
+
+.f-11 {
+  max-width: 91.6666666667%;
+  flex-basis: 91.6666666667%;
+}
+
+.f-10 {
+  max-width: 83.3333333333%;
+  flex-basis: 83.3333333333%;
+}

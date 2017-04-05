@@ -1,0 +1,11 @@
+nav {
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: lightgray;
+  font-size: 150%;
+}
+
+nav > span > a {
+  text-decoration: none;
+  color: var(--main-color);
+}

@@ -1,0 +1,15 @@
+<h1>
+  <a routerLink="/">Hero App</a>
+</h1>
+<div class="grid body">
+  <nav class="f-2 nav-vertical">
+    <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+    <a routerLink="/" (click)="logout()">Logout</a>
+  </nav>
+  <div class="f-10">
+    <div><path></path></div>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

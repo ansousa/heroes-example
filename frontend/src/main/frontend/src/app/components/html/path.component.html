@@ -1,0 +1,13 @@
+<nav>
+  <span>
+    <a *ngIf="route.parts?.length > 0" routerLink="/">
+      <i class="fa fa-home"></i>
+    </a>
+    <i *ngIf="route.parts == undefined || route.parts.length == 0" class="fa fa-home"></i>
+  </span>
+  <span *ngFor="let part of route.parts; let i = index">
+    /
+    <a *ngIf="i < route.parts.length - 1" routerLink="/{{part.full}}">{{part.part}}</a>
+    <span *ngIf="i == route.parts.length - 1">{{part.part}}</span>
+    </span>
+</nav>
