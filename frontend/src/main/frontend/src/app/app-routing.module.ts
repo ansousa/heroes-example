@@ -5,11 +5,13 @@ import { LoginComponent } from './components/login.component';
 import { HomeComponent } from './components/home.component';
 import { HeroesComponent } from './components/heroes.component';
 import { WelcomeComponent } from './components/welcome.component';
+import { HeroComponent } from './components/hero.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard], children: [
     { path: '', component: WelcomeComponent },
-    { path: 'heroes', component: HeroesComponent }
+    { path: 'heroes', component: HeroesComponent },
+    { path: 'hero/:id', component: HeroComponent }
   ] },
   { path: 'login', component: LoginComponent },
   { path: 'error', redirectTo: ''}

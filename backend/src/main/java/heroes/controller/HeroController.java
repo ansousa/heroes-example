@@ -1,13 +1,16 @@
 package heroes.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import heroes.model.Hero;
+import heroes.dao.HeroDao;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -15,18 +18,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class HeroController {
 	@RequestMapping(path = "/api/heroes", method = GET)
 	public List<Hero> heroes(){
-		Hero[] heroes = {
-				new Hero(11, "Mr. Nice"),
-				new Hero(12, "Narco"),
-				new Hero(13, "Bombasto"),
-				new Hero(14, "Celeritas"),
-				new Hero(15, "Magneta"),
-				new Hero(16, "RubberMan"),
-				new Hero(17, "Dynama"),
-				new Hero(18, "Dr IQ"),
-				new Hero(19, "Magma"),
-				new Hero(20, "Tornado"),
-		};
-		return new ArrayList<Hero>(Arrays.asList(heroes));
+		return HeroDao.getHeroes();
+	}
+	
+	@RequestMapping(path = "/api/hero/{id}", method = GET)
+	public Hero hero(@PathVariable("id") int id, HttpServletResponse response) throws ServletException {
+		Hero hero = HeroDao.getHero(id);
+		if(hero == null)
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		return hero;
 	}
 }

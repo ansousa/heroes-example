@@ -15,6 +15,7 @@ import { HomeComponent } from './components/home.component';
 import { HeroesComponent } from './components/heroes.component';
 import { WelcomeComponent } from './components/welcome.component';
 import { PathComponent } from './components/path.component';
+import { HeroComponent } from './components/hero.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PathComponent } from './components/path.component';
     HomeComponent,
     HeroesComponent,
     WelcomeComponent,
-    PathComponent
+    PathComponent,
+    HeroComponent
   ],
   imports: [
     BrowserModule,

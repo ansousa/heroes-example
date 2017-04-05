@@ -9,16 +9,21 @@ import { Hero } from '../models/hero';
 export class HeroService {
 
   private heroesUrl = 'api/heroes';
+  private heroUrl = 'api/hero';
 
   constructor(private authHttp: AuthHttp) { }
 
   getHeroes(): Promise<Hero[]> {
     return this.authHttp.get(this.heroesUrl)
       .toPromise()
-      .then(response => {
-          console.log(response);
-          return response.json() as Hero[]
-      })
+      .then(response => response.json() as Hero[])
+      .catch(this.handleError);
+  }
+
+  getHero(id: number): Promise<Hero> {
+    return this.authHttp.get(this.heroUrl + "/" + id)
+      .toPromise()
+      .then(response => response.json() as Hero)
       .catch(this.handleError);
   }
 

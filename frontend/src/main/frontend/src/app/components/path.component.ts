@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 class Route {
   parts: {part: string, full: string}[];
 
 }
+
 @Component({
   selector: 'path',
   templateUrl: './html/path.component.html',
   styleUrls: ['./css/path.component.css']
 })
-export class PathComponent {
+export class PathComponent implements OnInit {
   route: Route;
-  constructor(private router: Router){
+  constructor(private router: Router){}
+
+  ngOnInit(): void {
     this.route = new Route();
     this.router.events.subscribe((event) => {
       if(event instanceof NavigationEnd){
