@@ -1,0 +1,6 @@
+/target/
+/.project
+/.classpath
+/.settings/
+/src/main/frontend/node/
+/src/main/frontend/node_modules/

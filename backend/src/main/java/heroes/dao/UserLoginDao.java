@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import heroes.UserLogin;
+import heroes.model.UserLogin;
 
 public class UserLoginDao {
 
