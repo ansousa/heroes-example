@@ -6,12 +6,7 @@
     <div>
       <input type="password" placeholder="password" [(ngModel)]="password" (keyup.enter)="login()">
     </div>
-    <div *ngIf="error" class="error">
-      <div>Invalid name or password</div>
-      <button (click)="hideError()">
-        &#215;
-      </button>
-    </div>
+    <message #message></message>
     <div>
       <button (click)='login()'>Login</button>
     </div>

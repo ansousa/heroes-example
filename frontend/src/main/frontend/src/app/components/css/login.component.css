@@ -57,21 +57,3 @@ input,
 button {
   transition: box-shadow .5s ease;
 }
-
-div.error {
-  background-color: var(--error-color);
-  color: white;
-  border-radius: 4px;
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-div.error > button {
-  border: none;
-  border-radius: 50px;
-  background: transparent;
-  height: 31px;
-  width: 31px;
-}

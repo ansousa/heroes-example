@@ -27,6 +27,13 @@ export class HeroService {
       .catch(this.handleError);
   }
 
+  updateHero(hero: Hero): Promise<Hero> {
+    return this.authHttp.put(this.heroUrl, hero)
+      .toPromise()
+      .then(response => response.json() as Hero)
+      .catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

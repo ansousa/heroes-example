@@ -16,6 +16,7 @@ import { HeroesComponent } from './components/heroes.component';
 import { WelcomeComponent } from './components/welcome.component';
 import { PathComponent } from './components/path.component';
 import { HeroComponent } from './components/hero.component';
+import { MessageComponent } from './components/message.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HeroComponent } from './components/hero.component';
     HeroesComponent,
     WelcomeComponent,
     PathComponent,
-    HeroComponent
+    HeroComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

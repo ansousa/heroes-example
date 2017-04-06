@@ -1,0 +1,35 @@
+:host > div {
+  color: white;
+  border-radius: 4px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+:host > div > button {
+  border: none;
+  border-radius: 50px;
+  background: transparent;
+  height: 31px;
+  width: 31px;
+  color: white;
+  padding: 5px;
+  transition: box-shadow .5s ease;
+}
+
+:host > div > button:hover  {
+  box-shadow: 0px 0px 10px white;
+}
+
+:host > div > button:active {
+  box-shadow: inset 0px 0px 10px white;
+}
+
+:host > div.error {
+  background-color: var(--error-color);
+}
+
+:host > div.success {
+  background-color: var(--success-color);
+}

@@ -35,4 +35,13 @@ public class HeroDao {
 		}
 		return null;
 	}
+	
+	public static Hero updateHero(Hero hero){
+		for(Hero hero2: heroes){
+			if(hero.getId() == hero2.getId())
+				hero2 = hero;
+				return hero2;
+		}
+		return null;
+	}
 }

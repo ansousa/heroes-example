@@ -3,6 +3,7 @@
   --main-color: #0990ad;
   --secondary-color: #47c7e3;
   --error-color: #e34747;
+  --success-color: #47e36a;
 }
 
 html {
@@ -40,4 +41,12 @@ body {
 .f-10 {
   max-width: 83.3333333333%;
   flex-basis: 83.3333333333%;
+}
+
+h2 {
+  color: var(--main-color);
+}
+
+a {
+  text-decoration: none;
 }

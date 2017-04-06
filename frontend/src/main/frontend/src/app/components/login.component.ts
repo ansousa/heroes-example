@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+
+import { MessageComponent } from './message.component';
+import { Message, MessageType } from '../models/message';
 
 @Component({
   selector: 'login',
@@ -11,7 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   name: string;
   password: string;
-  error: Boolean = false;
+  @ViewChild(MessageComponent) message: MessageComponent;
 
   constructor(private auth: AuthService, private router: Router) {}
 
@@ -22,11 +25,7 @@ export class LoginComponent {
         localStorage.setItem('token', data.token);
         this.router.navigate(['']);
       },
-      error => this.error = true
+      error => this.message.add(new Message(MessageType.error, "Invalid name or password."))
     );
-  }
-
-  hideError(){
-    this.error = false;
   }
 }

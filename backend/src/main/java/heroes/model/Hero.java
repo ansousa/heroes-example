@@ -4,6 +4,8 @@ public class Hero {
 	private int id;
 	private String name;
 	
+	public Hero(){}
+	
 	public Hero(int id, String name) {
 		super();
 		this.id = id;
