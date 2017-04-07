@@ -15,6 +15,8 @@ import heroes.dao.HeroDao;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 
 @RestController
 public class HeroController {
@@ -37,5 +39,18 @@ public class HeroController {
 		if(hero2 == null)
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		return hero2;
+	}
+	
+	@RequestMapping(path = "/api/hero", method = POST)
+	public Hero addHero(@RequestBody final Hero hero) {
+		return HeroDao.addHero(hero);
+	}
+	
+	@RequestMapping(path = "/api/hero", method = DELETE)
+	public boolean deleteHero(@RequestBody final Hero hero, HttpServletResponse response) {
+		boolean deleted = HeroDao.deleteHero(hero);
+		if(!deleted)
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		return deleted;
 	}
 }

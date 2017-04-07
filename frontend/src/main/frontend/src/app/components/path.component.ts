@@ -20,8 +20,10 @@ export class PathComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if(event instanceof NavigationEnd){
         this.route.parts = [];
-        if(event.url != "/"){
-          let split = event.url.split("/");
+        let url = event.url;
+        url = url.split('?')[0];
+        if(url != "/"){
+          let split = url.split("/");
           for(let i = 0; i < split.length; i++){
             let full = "";
             if(i > 0)

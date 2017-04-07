@@ -29,18 +29,29 @@ export class HeroComponent implements OnInit{
         return this.heroService.getHero(+params['id']);
       }
       else return new Promise(resolve => new Hero());
-    }).subscribe(hero => this.hero = hero);
+    }).subscribe(hero => {
+      this.route.queryParams.subscribe((params: Params) => {
+        if(params["created"])
+          this.message.add(new Message(MessageType.success, 'Hero ' + params["created"]  + ' created successfully.'));
+      });
+      this.hero = hero
+    });
+    //return this.hero = hero;
   }
 
   save(): void {
     this.heroService.updateHero(this.hero)
       .then(hero => {
-        this.message.add(new Message(MessageType.success, 'Hero updated successfully.'))
+        this.message.add(new Message(MessageType.success, 'Hero updated successfully.'));
         return this.hero = hero;
       });
   }
 
   create(): void {
+    this.heroService.createHero(this.hero)
+      .then(hero => {
+        this.router.navigate(["hero", hero.id], {queryParams: {created: hero.name}});
+      });
 
   }
 }

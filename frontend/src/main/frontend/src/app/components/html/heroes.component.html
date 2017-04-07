@@ -1,9 +1,18 @@
 <h2>My Heroes <a routerLink="/hero"><i class="fa fa-plus"></i></a></h2>
+<message #message></message>
 <ul>
   <li *ngFor="let hero of heroes">
     <a routerLink="/hero/{{hero.id}}">
       <span>{{hero.id}}</span>
       <span>{{hero.name}}</span>
     </a>
+    <button (click)="warnDelete(hero)">
+      <i class="fa fa-trash"></i>
+    </button>
   </li>
 </ul>
+<modal #modal>
+  <div class="modal-header">header</div>
+  <div class="modal-body">body</div>
+  <div class="modal-footer">footer</div>
+</modal>

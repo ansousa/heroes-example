@@ -8,6 +8,7 @@ import heroes.model.Hero;
 
 public class HeroDao {
 	private static List<Hero> heroes;
+	private static int lastIndex = 20;
 	static {
 		Hero[] heroes = {
 				new Hero(11, "Mr. Nice"),
@@ -38,10 +39,27 @@ public class HeroDao {
 	
 	public static Hero updateHero(Hero hero){
 		for(Hero hero2: heroes){
-			if(hero.getId() == hero2.getId())
-				hero2 = hero;
+			if(hero.getId() == hero2.getId()){
+				hero2.setName(hero.getName());
 				return hero2;
+			}
 		}
 		return null;
+	}
+	
+	public static Hero addHero(Hero hero){
+		hero.setId(++lastIndex);
+		heroes.add(hero);
+		return hero;
+	}
+	
+	public static boolean deleteHero(Hero hero){
+		for(Hero hero2: heroes){
+			if(hero.getId() == hero2.getId()){
+				heroes.remove(hero2);
+				return true;
+			}
+		}
+		return false;
 	}
 }

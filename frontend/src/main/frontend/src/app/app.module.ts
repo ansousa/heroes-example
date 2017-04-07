@@ -17,6 +17,7 @@ import { WelcomeComponent } from './components/welcome.component';
 import { PathComponent } from './components/path.component';
 import { HeroComponent } from './components/hero.component';
 import { MessageComponent } from './components/message.component';
+import { ModalComponent } from './components/modal.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MessageComponent } from './components/message.component';
     WelcomeComponent,
     PathComponent,
     HeroComponent,
-    MessageComponent
+    MessageComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
