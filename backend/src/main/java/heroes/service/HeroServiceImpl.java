@@ -1,15 +1,18 @@
-package heroes.dao;
+package heroes.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import heroes.model.Hero;
 
-public class HeroDao {
-	private static List<Hero> heroes;
-	private static int lastIndex = 20;
-	static {
+@Service
+public class HeroServiceImpl implements HeroService{
+	private List<Hero> heroes;
+	private int lastIndex = 20;
+	public HeroServiceImpl() {
 		Hero[] heroes = {
 				new Hero(11, "Mr. Nice"),
 				new Hero(12, "Narco"),
@@ -22,23 +25,23 @@ public class HeroDao {
 				new Hero(19, "Magma"),
 				new Hero(20, "Tornado")
 		};
-		HeroDao.heroes = new ArrayList<Hero>(Arrays.asList(heroes));
+		this.heroes = new ArrayList<Hero>(Arrays.asList(heroes));
 	}
 	
-	public static List<Hero> getHeroes(){
-		return heroes;
+	public List<Hero> getHeroes(){
+		return this.heroes;
 	}
 	
-	public static Hero getHero(int id){
-		for(Hero hero: heroes){
+	public Hero getHero(int id){
+		for(Hero hero: this.heroes){
 			if(hero.getId() == id)
 				return hero;
 		}
 		return null;
 	}
 	
-	public static Hero updateHero(Hero hero){
-		for(Hero hero2: heroes){
+	public Hero updateHero(Hero hero){
+		for(Hero hero2: this.heroes){
 			if(hero.getId() == hero2.getId()){
 				hero2.setName(hero.getName());
 				return hero2;
@@ -47,16 +50,16 @@ public class HeroDao {
 		return null;
 	}
 	
-	public static Hero addHero(Hero hero){
-		hero.setId(++lastIndex);
-		heroes.add(hero);
+	public Hero addHero(Hero hero){
+		hero.setId(++this.lastIndex);
+		this.heroes.add(hero);
 		return hero;
 	}
 	
-	public static boolean deleteHero(Hero hero){
-		for(Hero hero2: heroes){
+	public boolean deleteHero(Hero hero){
+		for(Hero hero2: this.heroes){
 			if(hero.getId() == hero2.getId()){
-				heroes.remove(hero2);
+				this.heroes.remove(hero2);
 				return true;
 			}
 		}

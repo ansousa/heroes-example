@@ -7,7 +7,6 @@ public class UserLogin {
     public UserLogin(){}
     
 	public UserLogin(String name, String password) {
-		super();
 		this.name = name;
 		this.password = password;
 	}
