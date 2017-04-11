@@ -5,6 +5,7 @@ ul {
 ul > li {
   list-style-type: none;
   margin: 5px;
+  display: flex;
 }
 
 ul > li > a {
@@ -30,13 +31,43 @@ ul > li > a:hover > span:last-of-type {
   background-color: var(--main-color);
 }
 
-h2 > a > i {
+h2 > a > i,
+ul > li > div > i {
   padding: 5px;
-  background-color: var(--main-color);
   color: white;
   border-radius: 50px;
   height: 20px;
   width: 20px;
   text-align: center;
   font-size: 20px;
+}
+
+h2 > a > i {
+  background-color: var(--main-color);
+}
+
+ul > li > div > i {
+  background-color: var(--error-color);
+  cursor: pointer;
+}
+
+.modal-footer-buttons{
+  display: flex;
+  justify-content: end;
+}
+
+.modal-footer-buttons button {
+    border: 1px solid white;
+    border-radius: 4px;
+    color: white;
+    background-color: var(--main-color);
+    padding: 5px;
+    transition: box-shadow .5s ease;
+}
+.modal-footer-buttons button:hover  {
+  box-shadow: 0px 0px 10px white;
+}
+
+.modal-footer-buttons button:active {
+  box-shadow: inset 0px 0px 10px white;
 }

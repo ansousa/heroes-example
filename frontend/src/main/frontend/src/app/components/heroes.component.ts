@@ -14,7 +14,7 @@ import { ModalComponent } from './modal.component';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
-  selectedHero: Hero;
+  deleteHero: Hero;
   @ViewChild(MessageComponent) message: MessageComponent;
   @ViewChild(ModalComponent) modal: ModalComponent;
 
@@ -36,13 +36,15 @@ export class HeroesComponent implements OnInit {
   }
 
   warnDelete(hero: Hero){
+    this.deleteHero = hero;
     this.modal.show();
   }
 
-  delete(hero: Hero){
-    this.heroService.deleteHero(hero).then(() => {
-      this.heroes.splice(this.heroes.indexOf(hero), 1);
-      this.router.navigate(["heroes"], {queryParams: {deleted: hero.name}});
+  delete(){
+    this.heroService.deleteHero(this.deleteHero).then(() => {
+      this.heroes.splice(this.heroes.indexOf(this.deleteHero), 1);
+      this.router.navigate(["heroes"], {queryParams: {deleted: this.deleteHero.name}});
+      this.modal.hide();
     });
   }
 }

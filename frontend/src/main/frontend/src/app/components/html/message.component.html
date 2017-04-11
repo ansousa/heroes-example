@@ -1,6 +1,6 @@
 <div *ngFor="let message of messages; let i = index" class="{{MessageType[message.type]}}">
   <div>{{message.message}}</div>
   <button (click)="remove(i)">
-    &#215;
+    <i class="fa fa-close"></i>
   </button>
 </div>

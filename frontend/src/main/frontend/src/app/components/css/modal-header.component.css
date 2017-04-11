@@ -1,0 +1,30 @@
+:host {
+  background-color: var(--main-color);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+:host > button {
+  border: none;
+  border-radius: 50px;
+  background: transparent;
+  height: 31px;
+  width: 31px;
+  color: white;
+  padding: 5px;
+  transition: box-shadow .5s ease;
+}
+
+:host > button:hover  {
+  box-shadow: 0px 0px 10px white;
+}
+
+:host > button:active {
+  box-shadow: inset 0px 0px 10px white;
+}
+
+:host > div {
+  font-size: 1.5em;
+}
