@@ -6,13 +6,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import heroes.model.Hero;
+import heroes.model.Image;
+import heroes.model.ImageFromView;
 import heroes.service.HeroService;
+import heroes.service.ImageService;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
@@ -23,6 +27,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 public class HeroController {
 	@Autowired
 	private HeroService heroService;
+	@Autowired
+	private ImageService imageService;
 	
 	@RequestMapping(path = "/api/heroes", method = GET)
 	public List<Hero> heroes(){
@@ -51,10 +57,41 @@ public class HeroController {
 	}
 	
 	@RequestMapping(path = "/api/hero", method = DELETE)
-	public boolean deleteHero(@RequestBody final Hero hero, HttpServletResponse response) {
+	public void deleteHero(@RequestBody final Hero hero, HttpServletResponse response) {
 		boolean deleted = heroService.deleteHero(hero);
 		if(!deleted)
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-		return deleted;
+		imageService.deleteHeroImage(hero.getId());
+		response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+		return;
+	}
+	
+	@RequestMapping(path = "/api/hero/img/{id}", method = GET)
+	public String getHeroImg(@PathVariable("id") int id, HttpServletResponse response){
+		Image img = imageService.getHeroImage(id);
+		if(img == null){
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		response.setHeader("Content-Type", "image/" + img.getExtension().toString());
+		return "data:image/" + img.getExtension().toString().toLowerCase() + ";base64," + Base64Utils.encodeToString(img.getData());
+	}
+	
+	@RequestMapping(path = "/api/hero/img/{id}", method = DELETE)
+	public void deleteHeroImg(@PathVariable("id") int id, HttpServletResponse response){
+		if(!imageService.deleteHeroImage(id))
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		else
+			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+		return;
+	}
+	
+	@RequestMapping(path = "/api/hero/img/{id}", method = PUT)
+	public void addHeroImg(@PathVariable("id") int id, @RequestBody final ImageFromView image, HttpServletResponse response){
+		if(!imageService.addHeroImage(id, image.toImage()))
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		else
+			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+		return;
 	}
 }

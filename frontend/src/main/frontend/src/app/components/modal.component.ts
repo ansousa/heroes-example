@@ -10,9 +10,11 @@ export class ModalComponent {
 
   show(){
     this.hidden = false;
+    document.getElementsByTagName("body")[0].classList.add("modal-open");
   }
 
   hide(){
     this.hidden = true;
+    document.getElementsByTagName("body")[0].classList.remove("modal-open");
   }
 }

@@ -59,8 +59,7 @@ public class HeroServiceImpl implements HeroService{
 	public boolean deleteHero(Hero hero){
 		for(Hero hero2: this.heroes){
 			if(hero.getId() == hero2.getId()){
-				this.heroes.remove(hero2);
-				return true;
+				return this.heroes.remove(hero2);
 			}
 		}
 		return false;

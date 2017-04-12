@@ -24,7 +24,6 @@ ul > li > a > span:first-of-type {
 
 ul > li > a > span:last-of-type {
   background-color: var(--secondary-color);
-  border-radius: 0 4px 4px 0;
 }
 
 ul > li > a:hover > span:last-of-type {
@@ -49,6 +48,7 @@ h2 > a > i {
 ul > li > div > i {
   background-color: var(--error-color);
   cursor: pointer;
+  border-radius: 0 4px 4px 0;
 }
 
 .modal-footer-buttons{

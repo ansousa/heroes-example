@@ -5,12 +5,14 @@ import { RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Hero } from '../models/hero';
+import { Image } from '../models/image';
 
 @Injectable()
 export class HeroService {
 
   private heroesUrl = 'api/heroes';
   private heroUrl = 'api/hero';
+  private heroImgUrl = 'api/hero/img';
 
   constructor(private authHttp: AuthHttp) { }
 
@@ -48,6 +50,23 @@ export class HeroService {
       .then(response => true)
       .catch(this.handleError);
   }
+
+  getHeroImg(hero: Hero): Promise<String> {
+    let url: string = this.heroImgUrl + "/" + hero.id;
+    return this.authHttp.get(url)
+      .toPromise()
+      .then(response => response.text());
+  }
+
+  deleteHeroImg(hero: Hero): Promise<Boolean> {
+    let url: string = this.heroImgUrl + "/" + hero.id;
+      return this.authHttp.delete(url)
+        .toPromise()
+        .then(response => true)
+        .catch(this.handleError);
+  }
+
+  addHeroImg(hero: Hero, image: Image){}
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
