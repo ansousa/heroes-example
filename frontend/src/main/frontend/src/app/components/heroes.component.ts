@@ -41,7 +41,7 @@ export class HeroesComponent implements OnInit {
   }
 
   delete(){
-    this.heroService.deleteHero(this.deleteHero).then(() => {
+    this.heroService.deleteHero(this.deleteHero.id).then(() => {
       this.heroes.splice(this.heroes.indexOf(this.deleteHero), 1);
       this.router.navigate(["heroes"], {queryParams: {deleted: this.deleteHero.name}});
       this.modal.hide();

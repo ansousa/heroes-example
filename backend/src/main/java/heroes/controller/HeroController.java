@@ -56,12 +56,11 @@ public class HeroController {
 		return heroService.addHero(hero);
 	}
 	
-	@RequestMapping(path = "/api/hero", method = DELETE)
-	public void deleteHero(@RequestBody final Hero hero, HttpServletResponse response) {
-		boolean deleted = heroService.deleteHero(hero);
+	@RequestMapping(path = "/api/hero/{id}", method = DELETE)
+	public void deleteHero(@PathVariable("id") int id, HttpServletResponse response) {
+		boolean deleted = heroService.deleteHero(id);
 		if(!deleted)
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-		imageService.deleteHeroImage(hero.getId());
 		response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 		return;
 	}
@@ -88,7 +87,7 @@ public class HeroController {
 	
 	@RequestMapping(path = "/api/hero/img/{id}", method = PUT)
 	public void addHeroImg(@PathVariable("id") int id, @RequestBody final ImageFromView image, HttpServletResponse response){
-		if(!imageService.addHeroImage(id, image.toImage()))
+		if(!imageService.addHeroImage(image.toImage()))
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		else
 			response.setStatus(HttpServletResponse.SC_NO_CONTENT);

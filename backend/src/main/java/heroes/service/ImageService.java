@@ -5,5 +5,5 @@ import heroes.model.Image;
 public interface ImageService {
 	public Image getHeroImage(int id);
 	public boolean deleteHeroImage(int id);
-	public boolean addHeroImage(int id, Image image);
+	public boolean addHeroImage(Image image);
 }

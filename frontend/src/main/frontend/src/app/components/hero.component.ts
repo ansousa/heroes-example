@@ -85,7 +85,7 @@ export class HeroComponent implements OnInit{
   }
 
   addImage(): void {
-    this.heroService.addHeroImg(this.hero, new Image(this.imageExtension, this.imageFile))
+    this.heroService.addHeroImg(this.hero, new Image(this.hero.id, this.imageExtension, this.imageFile))
       .then(() => {
         this.loadImage();
         this.message.add(new Message(MessageType.success, 'Image updated successfully.'));

@@ -4,13 +4,23 @@ import java.util.Base64;
 
 
 public class ImageFromView {
+	private int id;
 	private String extension, data;
 
 	public ImageFromView(){}
 	
-	public ImageFromView(String extension, String data) {
+	public ImageFromView(int id, String extension, String data) {
+		this.setId(id);
 		this.setExtension(extension);
 		this.setData(data);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getExtension() {
@@ -33,6 +43,6 @@ public class ImageFromView {
 	public Image toImage(){
 		Image.Extension ext = Image.Extension.valueOf(this.extension);
 		byte[] data = Base64.getMimeDecoder().decode(this.data);
-		return new Image(ext, data);
+		return new Image(this.id, ext, data);
 	}
 }

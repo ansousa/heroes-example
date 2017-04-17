@@ -44,8 +44,8 @@ export class HeroService {
       .catch(this.handleError);
   }
 
-  deleteHero(hero: Hero): Promise<Boolean> {
-    return this.authHttp.delete(this.heroUrl, new RequestOptions({body:hero}))
+  deleteHero(id: number): Promise<Boolean> {
+    return this.authHttp.delete(this.heroUrl + "/" + id)
       .toPromise()
       .then(response => true)
       .catch(this.handleError);
