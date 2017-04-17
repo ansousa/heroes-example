@@ -21,7 +21,8 @@ export class HeroComponent implements OnInit{
   noHeroImagePath: String = "assets/img/noHeroImg.png";
   heroImage: String;
   @ViewChild(ModalComponent) modal: ModalComponent;
-  imageFile: string;
+  imageFile: String;
+  imageExtension: String;
 
   constructor(
     private heroService: HeroService,
@@ -46,7 +47,6 @@ export class HeroComponent implements OnInit{
       this.hero = hero;
       this.loadImage();
     });
-    //return this.hero = hero;
   }
 
   save(): void {
@@ -76,20 +76,31 @@ export class HeroComponent implements OnInit{
     let inputValue: any = event.target;
     let file: File = inputValue.files[0];
     let reader: FileReader = new FileReader();
-    let data;
+    this.imageExtension = file.name.split(".")[file.name.split(".").length - 1];
     reader.onloadend = (e) => {
-      data = reader.result;
+      console.log(reader.result);
+      this.imageFile = reader.result;
     }
-    reader.readAsArrayBuffer(file);
-    console.log(inputValue, data);
+    reader.readAsDataURL(file);
   }
 
   addImage(): void {
-    console.log(this.imageFile);
-    this.heroService.addHeroImg(this.hero, null);
+    this.heroService.addHeroImg(this.hero, new Image(this.imageExtension, this.imageFile))
+      .then(() => {
+        this.loadImage();
+        this.message.add(new Message(MessageType.success, 'Image updated successfully.'));
+      })
+      .catch(response => console.log(response));
   }
 
   private loadImage(): void {
-    this.heroService.getHeroImg(this.hero).then(data => this.heroImage = data);
+    this.heroService.getHeroImg(this.hero)
+      .then(data => this.heroImage = data)
+      .catch(response => console.log(response));
+  }
+
+  private resetAddImageVars(){
+    this.imageFile = null;
+    this.imageExtension = null;
   }
 }

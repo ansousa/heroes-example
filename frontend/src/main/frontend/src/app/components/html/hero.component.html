@@ -8,7 +8,7 @@
   </div>
   <div *ngIf="heroImage == noHeroImagePath">
     <input type="file" placeholder="Upload hero image" (change)="changeImageFile($event)"/>
-    <button (click)="addImage()">Add image</button>
+    <button (click)="addImage()" *ngIf="imageFile != null">Add image</button>
   </div>
   <div>
     <input type="text" placeholder="name" [(ngModel)]="hero.name" (keyup.enter)="save()"/>

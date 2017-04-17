@@ -1,7 +1,7 @@
 package heroes.model;
 
 public class Image {
-	public static enum Extension{JPEG, PNG}
+	public static enum Extension{jpeg, png}
 	
 	private Extension extension;
 	private byte[] data;

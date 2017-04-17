@@ -60,13 +60,19 @@ export class HeroService {
 
   deleteHeroImg(hero: Hero): Promise<Boolean> {
     let url: string = this.heroImgUrl + "/" + hero.id;
-      return this.authHttp.delete(url)
-        .toPromise()
-        .then(response => true)
-        .catch(this.handleError);
+    return this.authHttp.delete(url)
+      .toPromise()
+      .then(response => true)
+      .catch(this.handleError);
   }
 
-  addHeroImg(hero: Hero, image: Image){}
+  addHeroImg(hero: Hero, image: Image){
+    let url: string = this.heroImgUrl + "/" + hero.id;
+    return this.authHttp.put(url, image)
+      .toPromise()
+      .then(response => true)
+      .catch(this.handleError);
+  }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

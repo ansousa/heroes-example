@@ -1,6 +1,7 @@
 package heroes.model;
 
-import org.springframework.util.Base64Utils;
+import java.util.Base64;
+
 
 public class ImageFromView {
 	private String extension, data;
@@ -8,8 +9,8 @@ public class ImageFromView {
 	public ImageFromView(){}
 	
 	public ImageFromView(String extension, String data) {
-		this.extension = extension;
-		this.data = data;
+		this.setExtension(extension);
+		this.setData(data);
 	}
 
 	public String getExtension() {
@@ -17,7 +18,7 @@ public class ImageFromView {
 	}
 
 	public void setExtension(String extension) {
-		this.extension = extension;
+		this.extension = extension.toLowerCase().equals("jpg") ? "jpeg" :extension.toLowerCase();
 	}
 
 	public String getData() {
@@ -25,12 +26,13 @@ public class ImageFromView {
 	}
 
 	public void setData(String data) {
-		this.data = data;
+		String[] split = data.split(",");
+		this.data = split.length == 2 ? split[1] : data;
 	}
 	
 	public Image toImage(){
 		Image.Extension ext = Image.Extension.valueOf(this.extension);
-		byte[] data = Base64Utils.decodeFromString(this.data);
+		byte[] data = Base64.getMimeDecoder().decode(this.data);
 		return new Image(ext, data);
 	}
 }

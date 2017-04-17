@@ -19,7 +19,7 @@ public class ImageServiceImpl implements ImageService {
 		this.images = new HashMap<>();
 		for (int i = 11; i < 21; i++){
 			try(InputStream imgData = getClass().getClassLoader().getResourceAsStream("img/" + i + ".jpg")){
-				this.images.put(i, new Image(Image.Extension.JPEG, IOUtils.toByteArray(imgData)));
+				this.images.put(i, new Image(Image.Extension.jpeg, IOUtils.toByteArray(imgData)));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -37,7 +37,8 @@ public class ImageServiceImpl implements ImageService {
 	
 	@Override
 	public boolean addHeroImage(int id, Image image) {
-		return this.images.put(id, image) != null;
+		this.images.put(id, image);
+		return true;
 	}
 
 }
