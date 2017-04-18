@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import heroes.exception.HeroNotFoundException;
 import heroes.model.Hero;
 import heroes.repository.HeroRepository;
 
@@ -26,12 +27,17 @@ public class HeroServiceImpl implements HeroService {
 	}
 
 	@Override
-	public Hero getHero(int id) {
-		return repository.findOne(id);
+	public Hero getHero(int id) throws HeroNotFoundException {
+		Hero hero = repository.findOne(id);
+		if(hero == null)
+			throw new HeroNotFoundException(id);
+		return hero;
 	}
 
 	@Override
-	public Hero updateHero(Hero hero) {
+	public Hero updateHero(Hero hero) throws HeroNotFoundException {
+		if(!repository.exists(hero.getId()))
+			throw new HeroNotFoundException(hero.getId());
 		return repository.save(hero);
 	}
 
@@ -41,9 +47,10 @@ public class HeroServiceImpl implements HeroService {
 	}
 
 	@Override
-	public boolean deleteHero(int id) {
+	public void deleteHero(int id) throws HeroNotFoundException {
+		if(!repository.exists(id))
+			throw new HeroNotFoundException(id);
 		repository.delete(id);
-		return true;
 	}
 
 }

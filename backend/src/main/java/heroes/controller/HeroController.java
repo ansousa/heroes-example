@@ -2,7 +2,6 @@ package heroes.controller;
 
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import heroes.exception.HeroNotFoundException;
+import heroes.exception.ImageNotFoundException;
 import heroes.model.Hero;
 import heroes.model.Image;
 import heroes.model.ImageFromView;
@@ -36,19 +37,25 @@ public class HeroController {
 	}
 	
 	@RequestMapping(path = "/api/hero/{id}", method = GET)
-	public Hero hero(@PathVariable("id") int id, HttpServletResponse response) throws ServletException {
-		Hero hero = heroService.getHero(id);
-		if(hero == null)
+	public Hero hero(@PathVariable("id") int id, HttpServletResponse response){
+		try{
+			return heroService.getHero(id);
+		}
+		catch(HeroNotFoundException e){
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-		return hero;
+		}
+		return null;
 	}
 	
 	@RequestMapping(path = "/api/hero", method = PUT)
-	public Hero updateHero(@RequestBody final Hero hero, HttpServletResponse response) throws ServletException {
-		Hero hero2 = heroService.updateHero(hero);
-		if(hero2 == null)
+	public Hero updateHero(@RequestBody final Hero hero, HttpServletResponse response){
+		try{
+			return heroService.updateHero(hero);
+		}
+		catch(HeroNotFoundException e){
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-		return hero2;
+		}
+		return null;
 	}
 	
 	@RequestMapping(path = "/api/hero", method = POST)
@@ -58,39 +65,43 @@ public class HeroController {
 	
 	@RequestMapping(path = "/api/hero/{id}", method = DELETE)
 	public void deleteHero(@PathVariable("id") int id, HttpServletResponse response) {
-		boolean deleted = heroService.deleteHero(id);
-		if(!deleted)
+		try{
+			heroService.deleteHero(id);
+			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+			return;
+		}
+		catch(HeroNotFoundException e){
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-		response.setStatus(HttpServletResponse.SC_NO_CONTENT);
-		return;
+		}
 	}
 	
 	@RequestMapping(path = "/api/hero/img/{id}", method = GET)
 	public String getHeroImg(@PathVariable("id") int id, HttpServletResponse response){
-		Image img = imageService.getHeroImage(id);
-		if(img == null){
-			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-			return null;
+		try{
+			Image img = imageService.getHeroImage(id);
+			response.setHeader("Content-Type", "image/" + img.getExtension().toString());
+			return "data:image/" + img.getExtension().toString().toLowerCase() + ";base64," + Base64Utils.encodeToString(img.getData());
 		}
-		response.setHeader("Content-Type", "image/" + img.getExtension().toString());
-		return "data:image/" + img.getExtension().toString().toLowerCase() + ";base64," + Base64Utils.encodeToString(img.getData());
+		catch(ImageNotFoundException e){
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
+		return null;
 	}
 	
 	@RequestMapping(path = "/api/hero/img/{id}", method = DELETE)
 	public void deleteHeroImg(@PathVariable("id") int id, HttpServletResponse response){
-		if(!imageService.deleteHeroImage(id))
-			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-		else
+		try{
+			imageService.deleteHeroImage(id);
 			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
-		return;
+		}
+		catch(ImageNotFoundException e){
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
 	}
 	
 	@RequestMapping(path = "/api/hero/img/{id}", method = PUT)
 	public void addHeroImg(@PathVariable("id") int id, @RequestBody final ImageFromView image, HttpServletResponse response){
-		if(!imageService.addHeroImage(image.toImage()))
-			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-		else
-			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
-		return;
+		imageService.addHeroImage(image.toImage());
+		response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 	}
 }

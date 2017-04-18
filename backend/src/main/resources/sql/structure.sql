@@ -16,5 +16,14 @@ create table image(
 	data longblob not null,
 	
 	primary key (id),
-	foreign key (id) references hero(id)
+	foreign key (id) references hero(id) on delete cascade on update cascade
 );
+
+create table login(
+	name varchar(100) not null,
+	password varchar(100) not null,
+	
+	primary key (name)
+);
+
+insert into login values("a", "a");

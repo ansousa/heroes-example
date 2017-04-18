@@ -1,12 +1,17 @@
 package heroes.model;
 
-public class UserLogin {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Login {
+	@Id
     private String name;
     private String password;
     
-    public UserLogin(){}
+    public Login(){}
     
-	public UserLogin(String name, String password) {
+	public Login(String name, String password) {
 		this.name = name;
 		this.password = password;
 	}
@@ -29,17 +34,18 @@ public class UserLogin {
 	
 	@Override
 	public boolean equals(Object o){
-		UserLogin user = null;
+		Login user = null;
 		try{
-			user = (UserLogin)o;
+			user = (Login)o;
 		}
 		catch(ClassCastException e){
 			return false;
 		}
-		return this.name != null
+		return user != null
+			&& this.name != null
 			&& this.name.equals(user.name)
 			&& this.password != null
-			&& this.password.equals(user.name);
+			&& this.password.equals(user.password);
 	}
 
 }

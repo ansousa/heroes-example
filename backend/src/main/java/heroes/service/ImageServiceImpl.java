@@ -3,6 +3,7 @@ package heroes.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import heroes.exception.ImageNotFoundException;
 import heroes.model.Image;
 import heroes.repository.ImageRepository;
 
@@ -12,23 +13,23 @@ public class ImageServiceImpl implements ImageService{
 	private ImageRepository repository;
 
 	@Override
-	public Image getHeroImage(int id) {
-		return repository.findOne(id);
-	}
-
-	@Override
-	public boolean deleteHeroImage(int id) {
+	public Image getHeroImage(int id) throws ImageNotFoundException {
 		Image image = repository.findOne(id);
-		if(image != null){
-			repository.delete(repository.findOne(id));
-			return true;
-		}
-		return false;
+		if(image == null)
+			throw new ImageNotFoundException(id);
+		return image;
 	}
 
 	@Override
-	public boolean addHeroImage(Image image) {
-		return repository.save(image) != null;
+	public void deleteHeroImage(int id) throws ImageNotFoundException {
+		if(!repository.exists(id))
+			throw new ImageNotFoundException(id);
+		repository.delete(repository.findOne(id));
+	}
+
+	@Override
+	public Image addHeroImage(Image image) {
+		return repository.save(image);
 	}
 
 }
