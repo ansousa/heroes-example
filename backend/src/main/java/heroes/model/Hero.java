@@ -15,8 +15,8 @@ public class Hero {
 	public Hero(){}
 	
 	public Hero(int id, String name) {
-		this.id = id;
-		this.name = name;
+		this.setId(id);
+		this.setName(name);
 	}
 
 	public int getId() {
@@ -24,6 +24,8 @@ public class Hero {
 	}
 
 	public void setId(int id) {
+		if(id < 0)
+			throw new IllegalArgumentException();
 		this.id = id;
 	}
 
@@ -32,6 +34,8 @@ public class Hero {
 	}
 
 	public void setName(String name) {
+		if(name == null || name.isEmpty())
+			throw new IllegalArgumentException();
 		this.name = name;
 	}
 }

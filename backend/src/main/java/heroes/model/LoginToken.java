@@ -6,7 +6,7 @@ public class LoginToken {
     public LoginToken(){}
 
     public LoginToken(String token) {
-        this.token = token;
+        this.setToken(token);
     }
 
 	public String getToken() {

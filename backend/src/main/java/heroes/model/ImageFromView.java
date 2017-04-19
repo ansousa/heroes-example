@@ -20,6 +20,8 @@ public class ImageFromView {
 	}
 
 	public void setId(int id) {
+		if(id < 0)
+			throw new IllegalArgumentException();
 		this.id = id;
 	}
 
@@ -28,7 +30,9 @@ public class ImageFromView {
 	}
 
 	public void setExtension(String extension) {
-		this.extension = extension.toLowerCase().equals("jpg") ? "jpeg" :extension.toLowerCase();
+		if(extension == null || extension.isEmpty())
+			throw new IllegalArgumentException();
+		this.extension = extension.toLowerCase().equals("jpg") ? "jpeg" : extension.toLowerCase();
 	}
 
 	public String getData() {
@@ -36,6 +40,8 @@ public class ImageFromView {
 	}
 
 	public void setData(String data) {
+		if(data == null || data.isEmpty())
+			throw new IllegalArgumentException();
 		String[] split = data.split(",");
 		this.data = split.length == 2 ? split[1] : data;
 	}

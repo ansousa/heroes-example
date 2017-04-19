@@ -12,8 +12,8 @@ public class Login {
     public Login(){}
     
 	public Login(String name, String password) {
-		this.name = name;
-		this.password = password;
+		this.setName(name);
+		this.setPassword(password);
 	}
 
 	public String getName() {

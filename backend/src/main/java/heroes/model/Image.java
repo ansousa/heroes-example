@@ -1,6 +1,5 @@
 package heroes.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -21,9 +20,9 @@ public class Image {
 	public Image(){}
 	
 	public Image(int id, Extension extension, byte[] data) {
-		this.id = id;
-		this.extension = extension;
-		this.data = data;
+		this.setId(id);
+		this.setExtension(extension);
+		this.setData(data);
 	}
 
 	public int getId() {
@@ -31,6 +30,8 @@ public class Image {
 	}
 
 	public void setId(int id) {
+		if(id < 0)
+			throw new IllegalArgumentException();
 		this.id = id;
 	}
 
@@ -39,6 +40,8 @@ public class Image {
 	}
 	
 	public void setExtension(Extension extension) {
+		if(extension == null)
+			throw new IllegalArgumentException();
 		this.extension = extension;
 	}
 	
@@ -47,6 +50,8 @@ public class Image {
 	}
 	
 	public void setData(byte[] data) {
+		if(data == null)
+			throw new IllegalArgumentException();
 		this.data = data;
 	}
 	
