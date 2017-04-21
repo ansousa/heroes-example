@@ -38,4 +38,19 @@ public class Hero {
 			throw new IllegalArgumentException();
 		this.name = name;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		Hero hero = null;
+		try{
+			hero = (Hero)o;
+		}
+		catch(ClassCastException e){
+			return false;
+		}
+		return hero != null
+			&& this.id == hero.id
+			&& this.name != null
+			&& this.name.equals(hero.name);
+	}
 }

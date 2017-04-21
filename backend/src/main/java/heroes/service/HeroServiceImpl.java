@@ -36,6 +36,8 @@ public class HeroServiceImpl implements HeroService {
 
 	@Override
 	public Hero updateHero(Hero hero) throws HeroNotFoundException {
+		if(hero == null || hero.getName() == null)
+			throw new IllegalArgumentException();
 		if(!repository.exists(hero.getId()))
 			throw new HeroNotFoundException(hero.getId());
 		return repository.save(hero);
@@ -43,7 +45,11 @@ public class HeroServiceImpl implements HeroService {
 
 	@Override
 	public Hero addHero(Hero hero) {
-		return repository.save(hero);
+		if(hero == null || hero.getName() == null)
+			throw new IllegalArgumentException();
+		Hero hero2 = new Hero();
+		hero2.setName(hero.getName());
+		return repository.save(hero2);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import heroes.model.ImageFromViewTest;
 import heroes.model.ImageTest;
 import heroes.model.LoginTest;
 import heroes.model.LoginTokenTest;
+import heroes.service.HeroServiceTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({
@@ -16,7 +17,8 @@ import heroes.model.LoginTokenTest;
 	ImageTest.class,
 	ImageFromViewTest.class,
 	LoginTest.class,
-	LoginTokenTest.class
+	LoginTokenTest.class,
+	HeroServiceTest.class
 })
 public class UnitTestSuite {
 

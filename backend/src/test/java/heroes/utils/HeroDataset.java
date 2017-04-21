@@ -5,7 +5,7 @@ import heroes.model.Hero;
 public class HeroDataset {
 	
 	public static Hero getValidHero(){
-		return new Hero(0, "Hero0");
+		return new Hero(getValidHeroId(), getValidHeroName());
 	}
 	
 	public static int getValidHeroId(){
@@ -13,7 +13,7 @@ public class HeroDataset {
 	}
 	
 	public static String getValidHeroName(){
-		return "Hero1";
+		return "A";
 	}
 	
 	public static int getInvalidHeroId(){
@@ -22,5 +22,23 @@ public class HeroDataset {
 	
 	public static String getInvalidHeroName(){
 		return "";
+	}
+	
+	public static Hero[] getHeroes(){
+		return new Hero[]{
+			new Hero(1, "A"),
+			new Hero(2, "B"),
+			new Hero(3, "C"),
+			new Hero(4, "D"),
+			new Hero(5, "E")
+		};
+	}
+	
+	public static int getNonExistentHeroId(){
+		return 6;
+	}
+	
+	public static String getAnotherValidHeroName(){
+		return "asd";
 	}
 }
