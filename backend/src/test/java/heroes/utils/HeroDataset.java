@@ -41,4 +41,8 @@ public class HeroDataset {
 	public static String getAnotherValidHeroName(){
 		return "asd";
 	}
+	
+	public static int getExistentHeroIdWithoutImage(){
+		return 4;
+	}
 }

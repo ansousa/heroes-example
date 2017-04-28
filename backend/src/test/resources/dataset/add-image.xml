@@ -1,0 +1,13 @@
+<dataset>
+	<hero id="1" name="A"/>
+	<hero id="2" name="B"/>
+	<hero id="3" name="C"/>
+	<hero id="4" name="D"/>
+	<hero id="5" name="E"/>
+	
+	<image id="1" extension="jpeg" data="YWFh"></image>
+	<image id="2" extension="png" data="YXNkYXNkYXNk"></image>
+	<image id="3" extension="jpeg" data="YXNkYXNkYXNkYXNk"></image>
+	<image id="4" extension="jpeg" data="YWFh"></image>
+	<image id="5" extension="jpeg" data="YXNk"></image>
+</dataset>

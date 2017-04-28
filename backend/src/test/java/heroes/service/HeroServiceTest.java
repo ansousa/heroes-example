@@ -31,7 +31,6 @@ import static org.hamcrest.Matchers.greaterThan;
 @DatabaseSetup("/dataset/default.xml")
 @ContextConfiguration(classes = {TestConfig.class}, loader = AnnotationConfigContextLoader.class)
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
-
 public class HeroServiceTest {
 	@Autowired
 	private HeroService heroService;
@@ -41,8 +40,8 @@ public class HeroServiceTest {
 	public void getHeroTest() throws HeroNotFoundException{
 		Hero hero = getValidHero();
 		Hero result = heroService.getHero(hero.getId());
-		assertThat(hero.getId(), is(equalTo(result.getId())));
-		assertThat(hero.getName(), is(equalTo(result.getName())));
+		assertThat(result.getId(), is(equalTo(hero.getId())));
+		assertThat(result.getName(), is(equalTo(hero.getName())));
 	}
 	
 	@Test(expected = HeroNotFoundException.class)

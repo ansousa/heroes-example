@@ -24,5 +24,4 @@ public class ImageDataset {
 	public static int getInvalidImageId(){
 		return -1;
 	}
-
 }

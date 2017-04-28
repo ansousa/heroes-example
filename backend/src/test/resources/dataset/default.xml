@@ -4,4 +4,11 @@
 	<hero id="3" name="C"/>
 	<hero id="4" name="D"/>
 	<hero id="5" name="E"/>
+	
+	<image id="1" extension="jpeg" data="YWFh"/>
+	<image id="2" extension="png" data="YXNkYXNkYXNk"/>
+	<image id="3" extension="jpeg" data="YXNkYXNkYXNkYXNk"/>
+	<image id="5" extension="jpeg" data="YXNk"/>
+	
+	<login name="a" password="b"/>
 </dataset>
